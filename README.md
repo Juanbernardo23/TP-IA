@@ -1,2 +1,0 @@
-# TP-IA
-TP IA
