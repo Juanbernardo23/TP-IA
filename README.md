@@ -117,30 +117,55 @@ Por lo que se tuvo que tomar la decisión de dejar de perder tiempo y buscar otr
 La estructura de las carpetas y archivos, luego de descargar localmente la IA y proponer el entrenamiento, finalmente fue:
 
 mi-proyecto-finetuning/
+
 ├── data/
+
 │   └── train.json                     # Dataset de entrenamiento con conceptos matemáticos
+
 ├── phi-2/                                # Modelo original sin fine-tuning
+
 │   └── (...)                              # Archivos del modelo base Phi-2
+
 ├── phi-2-finetuned/                # Modelo ya ajustado
+
 │   ├── added_tokens.json
+
 │   ├── config.json
+
 │   ├── generation_config.json
+
 │   ├── merges.txt
+
 │   ├── model.safetensors.index
+
 │   ├── model-00001-of-00003.safetensors
+
 │   ├── model-00002-of-00003.safetensors
+
 │   ├── model-00003-of-00003.safetensors
+
 │   ├── special_tokens_map.json
+
 │   ├── tokenizer/
+
 │   ├── tokenizer_config.json
+
 │   ├── training_args.bin
+
 │   └── vocab.json
+
 ├── checkpoints/                    # Checkpoints intermedios del fine-tuning
+
 │   └── checkpoint-*/               # Subcarpetas con estados intermedios
+
 ├── config.py                       # Configuración general del proyecto
+
 ├── datamodule.py                  # Lógica de carga y procesamiento del dataset
+
 ├── train.py                        # Script principal de entrenamiento
+
 ├── chat.py                         # Script para cargar el modelo finetuneado y responder preguntas
+
 
 
 El proceso de los entrenamientos fueron largos, pasando por muchos intentos con fallas las cuales tardaban muchas horas, luego al probarlas daban errores de codificación, ya que luego de analizar con detenimiento y generar alertas vía código, identificaba que el entrenamiento creaba muchos tokens vacíos en el tokenizer.json de salida (archivos muy largos), pero a eso solo lo podía comprobar entrenando el modelo y esperando, además de intentar adaptar el script de chat, quien también podría estar dando un mal resultado:
